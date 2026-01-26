@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-app = FastAPI(title="eSkillVeda UPI Redirect Service")
+app = FastAPI(title="eSkillVeda UPI Payment Page")
 
 # Fixed fee amount
 AMOUNT = "2500.00"
 
+# UPI Deep Link Construction
 UPI_LINK = (
     "upi://pay?"
     "pa=eskillvedaedtech@sbi"
@@ -39,79 +40,108 @@ def pay():
                 align-items: center;
                 height: 100vh;
                 background: #ffffff;
-                font-family: Arial, sans-serif;
+                font-family: 'Segoe UI', Arial, sans-serif;
             }}
             .container {{
                 text-align: center;
                 width: 100%;
-                max-width: 320px;
-                padding: 20px;
+                max-width: 340px;
+                padding: 30px 20px;
+                /* Optional: Add a subtle shadow for a 'card' feel */
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                border-radius: 12px;
+                border: 1px solid #f0f0f0;
             }}
-            .loader {{
-                width: 70px;
-                height: 70px;
-                border: 6px solid #f1f1f1;
-                border-top: 6px solid #1e88e5;
-                border-right: 6px solid #f9a825;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-                margin: 0 auto 20px;
+            /* New Logo Styles */
+            .logo {{
+                font-size: 32px;
+                font-weight: 800;
+                margin-bottom: 25px;
+                letter-spacing: -0.5px;
+                line-height: 1.2;
             }}
-            @keyframes spin {{
-                0% {{ transform: rotate(0deg); }}
-                100% {{ transform: rotate(360deg); }}
+            .text-yellow {{
+                color: #f9a825; /* Matches previous loader yellow */
             }}
+            .text-blue {{
+                color: #1e88e5; /* Matches previous loader blue */
+            }}
+            
             .title {{
-                font-size: 20px;
-                font-weight: 600;
-                color: #222;
-                margin-bottom: 6px;
+                font-size: 18px;
+                font-weight: 500;
+                color: #555;
+                margin-bottom: 8px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
             }}
             .amount {{
-                font-size: 22px;
+                font-size: 36px;
                 font-weight: 700;
-                color: #1e88e5;
-                margin-bottom: 16px;
+                color: #222;
+                margin-bottom: 25px;
+            }}
+            .currency {{
+                font-size: 24px;
+                color: #555;
+                vertical-align: top;
+                margin-top: 4px;
+                display: inline-block;
             }}
             .btn {{
-                display: inline-block;
-                padding: 14px 22px;
-                font-size: 16px;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 16px;
+                font-size: 18px;
                 background: #1e88e5;
                 color: white;
                 border-radius: 8px;
                 text-decoration: none;
                 font-weight: 600;
+                transition: background 0.2s;
+                box-shadow: 0 4px 6px rgba(30, 136, 229, 0.2);
+            }}
+            .btn:hover {{
+                background: #1976d2;
             }}
             .hint {{
-                margin-top: 12px;
-                font-size: 13px;
-                color: #666;
+                margin-top: 15px;
+                font-size: 14px;
+                color: #777;
+                line-height: 1.4;
             }}
-            .brand {{
-                margin-top: 20px;
-                font-size: 13px;
-                color: #888;
+            .brand-footer {{
+                margin-top: 30px;
+                font-size: 12px;
+                color: #aaa;
+                border-top: 1px solid #eee;
+                padding-top: 15px;
             }}
         </style>
     </head>
     <body>
         <div class="container">
-            <div class="loader"></div>
+            <div class="logo">
+                <span class="text-yellow">e</span><span class="text-blue">SkillVeda</span>
+            </div>
 
-            <div class="title">Course Fee</div>
-            <div class="amount">₹ 2500</div>
+            <div class="title">Total Payable</div>
+            
+            <div class="amount">
+                <span class="currency">₹</span>2,500
+            </div>
 
             <a class="btn" href="{UPI_LINK}">
-                Pay ₹2500 Now
+                Pay Securely
             </a>
 
             <div class="hint">
-                You will be asked to choose your UPI app.
+                Tap the button above to pay using GPay, PhonePe, or Paytm.
             </div>
 
-            <div class="brand">
-                eSkillVeda Secure Payment
+            <div class="brand-footer">
+                Secured by eSkillVeda Payments
             </div>
         </div>
     </body>
