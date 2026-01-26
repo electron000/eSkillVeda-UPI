@@ -3,7 +3,24 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI(title="eSkillVeda UPI Redirect Service")
 
-UPI_LINK = "upi://pay?pa=eskillvedaedtech@sbi&pn=ESKILLVEDA%20EDTECH%20PRIVATE%20LIMITED&mc=8241&tr=&tn=&am=&cu=INR&url=&mode=02&purpose=00&orgid=180102&sign=MEUCIAhR03oQ2uuXEMl+huknYjM6dU9XsbTaD2Zl/EEnbTgtAiEA2iZbD7gGOqVHeUOvk98mNRSkCu7CgHLkT6CKM8USGzk="
+# Fixed fee amount
+AMOUNT = "2500.00"
+
+UPI_LINK = (
+    "upi://pay?"
+    "pa=eskillvedaedtech@sbi"
+    "&pn=ESKILLVEDA%20EDTECH%20PRIVATE%20LIMITED"
+    "&mc=8241"
+    "&tr="
+    "&tn=Course%20Fee"
+    f"&am={AMOUNT}"
+    "&cu=INR"
+    "&url="
+    "&mode=02"
+    "&purpose=00"
+    "&orgid=180102"
+    "&sign=MEUCIAhR03oQ2uuXEMl+huknYjM6dU9XsbTaD2Zl/EEnbTgtAiEA2iZbD7gGOqVHeUOvk98mNRSkCu7CgHLkT6CKM8USGzk="
+)
 
 @app.get("/pay", response_class=HTMLResponse)
 def pay():
@@ -27,7 +44,8 @@ def pay():
             .container {{
                 text-align: center;
                 width: 100%;
-                max-width: 300px;
+                max-width: 320px;
+                padding: 20px;
             }}
             .loader {{
                 width: 70px;
@@ -43,19 +61,25 @@ def pay():
                 0% {{ transform: rotate(0deg); }}
                 100% {{ transform: rotate(360deg); }}
             }}
-            .text {{
-                font-size: 18px;
-                color: #333;
-                font-weight: 500;
+            .title {{
+                font-size: 20px;
+                font-weight: 600;
+                color: #222;
+                margin-bottom: 6px;
+            }}
+            .amount {{
+                font-size: 22px;
+                font-weight: 700;
+                color: #1e88e5;
                 margin-bottom: 16px;
             }}
             .btn {{
                 display: inline-block;
-                padding: 12px 20px;
+                padding: 14px 22px;
                 font-size: 16px;
                 background: #1e88e5;
                 color: white;
-                border-radius: 6px;
+                border-radius: 8px;
                 text-decoration: none;
                 font-weight: 600;
             }}
@@ -64,19 +88,30 @@ def pay():
                 font-size: 13px;
                 color: #666;
             }}
+            .brand {{
+                margin-top: 20px;
+                font-size: 13px;
+                color: #888;
+            }}
         </style>
     </head>
     <body>
         <div class="container">
             <div class="loader"></div>
-            <div class="text">Continue to payment</div>
+
+            <div class="title">Course Fee</div>
+            <div class="amount">₹ 2500</div>
 
             <a class="btn" href="{UPI_LINK}">
-                Open Payment App
+                Pay ₹2500 Now
             </a>
 
             <div class="hint">
-                If it does not open automatically, tap the button.
+                You will be asked to choose your UPI app.
+            </div>
+
+            <div class="brand">
+                eSkillVeda Secure Payment
             </div>
         </div>
     </body>
