@@ -26,15 +26,13 @@ def pay():
             }}
             .container {{
                 text-align: center;
-                width: 100%;
-                max-width: 300px;
             }}
             .loader {{
                 width: 70px;
                 height: 70px;
                 border: 6px solid #f1f1f1;
-                border-top: 6px solid #1e88e5;
-                border-right: 6px solid #f9a825;
+                border-top: 6px solid #1e88e5; /* Blue */
+                border-right: 6px solid #f9a825; /* Dark Yellow */
                 border-radius: 50%;
                 animation: spin 1s linear infinite;
                 margin: 0 auto 20px;
@@ -47,21 +45,10 @@ def pay():
                 font-size: 18px;
                 color: #333;
                 font-weight: 500;
-                margin-bottom: 16px;
             }}
-            .btn {{
-                display: inline-block;
-                padding: 12px 20px;
-                font-size: 16px;
-                background: #1e88e5;
-                color: white;
-                border-radius: 6px;
-                text-decoration: none;
-                font-weight: 600;
-            }}
-            .hint {{
-                margin-top: 12px;
-                font-size: 13px;
+            .brand {{
+                margin-top: 8px;
+                font-size: 14px;
                 color: #666;
             }}
         </style>
@@ -69,16 +56,15 @@ def pay():
     <body>
         <div class="container">
             <div class="loader"></div>
-            <div class="text">Continue to payment</div>
-
-            <a class="btn" href="{UPI_LINK}">
-                Open Payment App
-            </a>
-
-            <div class="hint">
-                If it does not open automatically, tap the button.
-            </div>
+            <div class="text">Opening payment app...</div>
+            <div class="brand">eSkillVeda Secure Payment</div>
         </div>
+
+        <script>
+            setTimeout(function() {{
+                window.location.href = "{UPI_LINK}";
+            }}, 1200);
+        </script>
     </body>
     </html>
     """
