@@ -6,7 +6,9 @@ app = FastAPI(title="eSkillVeda UPI Payment Page")
 # -------------------------------
 # Health check endpoint for UptimeRobot
 # -------------------------------
-@app.get("/health", methods=["GET", "HEAD"], response_class=PlainTextResponse)
+@app.api_route("/health",
+methods=["GET", "HEAD"],
+response_class=PlainTextResponse)
 def health():
     return "OK"
 
