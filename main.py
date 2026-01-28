@@ -1,7 +1,18 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 
 app = FastAPI(title="eSkillVeda UPI Payment Page")
+
+# -------------------------------
+# Health check endpoint for UptimeRobot
+# -------------------------------
+@app.get("/health", response_class=PlainTextResponse)
+def health():
+    return "OK"
+
+# -------------------------------
+# Existing code (UNCHANGED)
+# -------------------------------
 
 # Fixed fee amount
 AMOUNT = "2500.00"
