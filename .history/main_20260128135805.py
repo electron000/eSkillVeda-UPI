@@ -6,7 +6,7 @@ app = FastAPI(title="eSkillVeda UPI Payment Page")
 # -------------------------------
 # Health check endpoint for UptimeRobot
 # -------------------------------
-@app.get("/health", methods=["GET", "HEAD"], response_class=PlainTextResponse)
+@app.get("/health", response_class=PlainTextResponse)
 def health():
     return "OK"
 
@@ -19,19 +19,7 @@ AMOUNT = "2500.00"
 
 # UPI Deep Link Construction
 UPI_LINK = (
-    "upi://pay?"
-    "pa=eskillvedaedtechprivatelimited1558@sbi"
-    "&pn=ESKILLVEDA%20EDTECH%20PRIVATE%20LIMITED"
-    "&mc=8299"
-    "&tr="
-    "&tn=Course%20Fee"
-    f"&am={AMOUNT}"
-    "&cu=INR"
-    "&url="
-    "&mode=02"
-    "&purpose=00"
-    "&orgid=180102"
-    "&sign=MEQCIF3CF5XLFA/HN21qnMrMf1GFhoTzHJCBCstjwAPWR6jcAiBBbes2o0ZHiVsHVCnxdAAYl0rAvUW6JNER0I4qUqYK6A=="
+    "upi://pay?pa=eskillvedaedtechprivatelimited1558@sbi&pn=ESKILLVEDA%20EDTECH%20PRIVATE%20LIMITED&mc=8299&tr=&tn=&am=&cu=INR&url=&mode=02&purpose=00&orgid=180102&sign=MEQCIF3CF5XLFA/HN21qnMrMf1GFhoTzHJCBCstjwAPWR6jcAiBBbes2o0ZHiVsHVCnxdAAYl0rAvUW6JNER0I4qUqYK6A=="
 )
 
 @app.get("/pay", response_class=HTMLResponse)
